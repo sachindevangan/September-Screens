@@ -1,0 +1,32 @@
+.nav-buttons {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: flex;
+  gap: 0.6rem;
+  z-index: 10;
+}
+
+.nav-btn {
+  background: rgba(92, 18, 18, 0.85);
+  border: 2px solid #fff;
+  border-radius: 12px;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  font-family: "Karantina", cursive;
+  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #2f2e2e;
+  transition: transform 0.15s ease-in-out;
+}
+
+.nav-btn:hover {
+  transform: scale(1.05);
+  background: rgba(140, 30, 30, 0.9);
+}
+
+
+/* Hide button (for first-time users with empty watchlist) */
+.watchlist-btn.hidden {
+  display: none;
+}

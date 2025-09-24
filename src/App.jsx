@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import React, { useRef } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useAppContext } from "./context/AppContext";
+import LandingPage from "./screens/LandingPage";
+import WithWho from "./screens/WithWhoScreen";
+import Weather from "./screens/WeatherScreen";
+import TreeScreen from "./screens/TreeScreen";
+import SuggestionScreen from "./screens/SuggestionScreen";
+import WatchlistScreen from "./screens/WatchlistScreen"; // ✅ import
+import BackgroundSound from "./components/BackgroundSound";
+import SoundToggle from "./components/SoundToggle";
+import Loading from "./screens/LoadingScreen";
 
-function App() {
-  const [count, setCount] = useState(0)
+function GlobalSound() {
+  const { weather } = useAppContext();
+  const location = useLocation();
+  const audioRef = useRef();
+
+  let soundKey = weather;
+
+  // Force birds (icon + sound) on home and with-who
+  if (location.pathname === "/" || location.pathname === "/with-who") {
+    soundKey = "CRISP & SUNNY";
+  }
+
+  // Disable completely on watchlist
+  if (location.pathname === "/watchlist") {
+    soundKey = null;
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <BackgroundSound weather={soundKey} audioRef={audioRef} />
+      {soundKey && <SoundToggle audioRef={audioRef} weather={soundKey} />}
     </>
-  )
+  );
 }
 
-export default App
+
+export default function App() {
+  return (
+    <>
+      <GlobalSound /> {/* 🎵 one global audio player */}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/with-who" element={<WithWho />} />
+        <Route path="/weather" element={<Weather />} />
+        <Route path="/tree" element={<TreeScreen />} />
+        <Route path="/suggestion" element={<SuggestionScreen />} />
+        <Route path="/loading" element={<Loading />} />
+        <Route path="/watchlist" element={<WatchlistScreen />} /> {/* ✅ */}
+      </Routes>
+    </>
+  );
+}

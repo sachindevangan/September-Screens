@@ -66,3 +66,37 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* 🚫 disables vertical + horizontal scroll */
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+
+/* index.css or App.css */
+.sound-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(92,18,18,0.8);
+  color: white;
+  border: 2px solid #fff;
+  border-radius: 12px;
+  padding: 0.4rem 0.8rem;
+  font-family: "Karantina", cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 1000;
+}
+.sound-btn:hover {
+  background: rgba(140,30,30,0.9);
+}

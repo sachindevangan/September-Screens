@@ -1,0 +1,118 @@
+.landing-container {
+  height: 100vh;
+  width: 100vw;
+  background: url("/assets/backgrounds/LandingPage-bg.gif") no-repeat center center;
+  background-size: 100% 100%; /* stretch GIF across the screen */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  padding: 1rem;
+}
+
+.landing-content {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #000;
+  max-width: 900px;
+  width: 100%; /* allow shrinking on small screens */
+  padding: 0 1rem;
+}
+
+/* Main heading */
+.landing-content h1 {
+  font-size: clamp(2.5rem, 6vw, 8rem); /* scales with viewport */
+  font-family: "Karantina", cursive;
+  font-weight: 400;
+  letter-spacing: 5%;
+  color: #2f2e2e;
+  margin-bottom: 1.5rem;
+}
+
+/* Subtitle */
+.landing-content p {
+  font-size: clamp(1rem, 2.5vw, 2.2rem);
+  font-family: "Karantina", cursive;
+  font-weight: 400;
+  letter-spacing: 5%;
+  color: #111010;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Tagline */
+.tagline {
+  font-size: clamp(1.2rem, 3vw, 2.5rem);
+  font-family: "Karantina", cursive;
+  font-weight: 700;
+  letter-spacing: 5%;
+  color: #111010;
+  margin-bottom: 2rem;
+}
+
+/* Button */
+/* Button */
+.landing-content button {
+  background: #6e1c1c;
+  color: #fff;
+  border: none;
+  padding: clamp(14px, 3vw, 20px) clamp(28px, 6vw, 40px); /* ⬆ bigger padding */
+  font-size: clamp(1.2rem, 3vw, 1.6rem); /* ⬆ larger text */
+  border-radius: 35px; /* ⬆ more rounded */
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  font-family: "Karantina", cursive;
+}
+
+
+.landing-content button:hover {
+  transform: scale(1.05);
+  background: #8a2424;
+}
+
+/* 📱 Mobile adjustments */
+@media (max-width: 768px) {
+  .landing-content {
+    top: 15%; /* move text up for smaller screens */
+    padding: 0 1rem;
+  }
+
+  .landing-content h1 {
+    margin-bottom: 1rem;
+  }
+
+  .landing-content p {
+    line-height: 1.4;
+  }
+
+  .tagline {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* 📱 Extra small screens */
+@media (max-width: 480px) {
+  .landing-content {
+    top: 10%; /* adjust vertical spacing for small phones */
+  }
+
+  .landing-content h1 {
+    font-size: clamp(2rem, 8vw, 4rem); /* shrink heading more */
+  }
+
+  .landing-content p {
+    font-size: clamp(0.9rem, 3vw, 1.4rem);
+  }
+
+  .tagline {
+    font-size: clamp(1rem, 3.5vw, 1.6rem);
+  }
+
+  .landing-content button {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
