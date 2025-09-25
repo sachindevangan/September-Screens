@@ -1,37 +1,44 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, session } from "electron";
 import path from "path";
 import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const isDev = !app.isPackaged;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1280,
+    width: 1200,
     height: 800,
     webPreferences: {
-      nodeIntegration: false,
-      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"), // optional
     },
   });
 
-  if (isDev) {
-    mainWindow.loadURL("http://localhost:5173"); // Vite dev server
-    // mainWindow.webContents.openDevTools(); // auto open dev tools in dev
-  } else {
-    mainWindow.loadFile(path.join(__dirname, "dist", "index.html")); // build
-  }
+  const startUrl =
+    process.env.VITE_DEV_SERVER_URL ||
+    `file://${path.join(__dirname, "dist/index.html")}`;
+
+  mainWindow.loadURL(startUrl);
+
+  // ✅ Allow geolocation requests
+  session.defaultSession.setPermissionRequestHandler(
+    (webContents, permission, callback) => {
+      if (permission === "geolocation") {
+        console.log("Geolocation permission granted ✅");
+        callback(true);
+      } else {
+        callback(false);
+      }
+    }
+  );
 
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
 }
 
-app.on("ready", createWindow);
+app.whenReady().then(createWindow);
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

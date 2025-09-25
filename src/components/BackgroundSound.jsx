@@ -4,14 +4,13 @@ export default function BackgroundSound({ weather, audioRef }) {
   const internalRef = useRef(null);
   const ref = audioRef || internalRef;
 
-  // ✅ Shared cap for background audio
   const BACKGROUND_VOLUME = 0.25;
 
   const soundMap = {
-    "CRISP & SUNNY": "/assets/sounds/sunny-birds.mp3",
-    "RAINY & COZY": "/assets/sounds/rain.mp3",
-    "WINDY & BROODING": "/assets/sounds/wind.mp3",
-    "STORMY & DRAMATIC": "/assets/sounds/thunder.mp3",
+    "CRISP & SUNNY": `${import.meta.env.BASE_URL}assets/sounds/sunny-birds.mp3`,
+    "RAINY & COZY": `${import.meta.env.BASE_URL}assets/sounds/rain.mp3`,
+    "WINDY & BROODING": `${import.meta.env.BASE_URL}assets/sounds/wind.mp3`,
+    "STORMY & DRAMATIC": `${import.meta.env.BASE_URL}assets/sounds/thunder.mp3`,
   };
 
   const fadeDurations = {
@@ -21,7 +20,6 @@ export default function BackgroundSound({ weather, audioRef }) {
     "STORMY & DRAMATIC": { fadeOut: 400, fadeIn: 900 },
   };
 
-  // 🔊 fade helper
   const fadeVolume = (audio, target, duration = 1000) => {
     if (!audio) return;
     const stepTime = 50;
@@ -42,7 +40,6 @@ export default function BackgroundSound({ weather, audioRef }) {
     const audioEl = ref.current;
     if (!audioEl) return;
 
-    // 🛑 Case 1: No weather → stop sound
     if (!weather) {
       fadeVolume(audioEl, 0, 600);
       setTimeout(() => {
@@ -52,7 +49,6 @@ export default function BackgroundSound({ weather, audioRef }) {
       return;
     }
 
-    // 🟢 Case 2: Valid weather → switch sound
     const { fadeOut, fadeIn } = fadeDurations[weather] || {
       fadeOut: 800,
       fadeIn: 1200,

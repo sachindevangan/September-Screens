@@ -8,40 +8,45 @@ export default function LoadingScreen() {
   const { weather } = useAppContext();
   const [progress, setProgress] = useState(0);
 
-  // Backgrounds per weather
+  // Backgrounds per weather (use BASE_URL so they work on GitHub Pages)
   const backgrounds = {
-    "CRISP & SUNNY": "/assets/backgrounds/SunnyLoading.gif",
-    "RAINY & COZY": "/assets/backgrounds/RainyLoading.gif",
-    "WINDY & BROODING": "/assets/backgrounds/WindyLoading.gif",
-    "STORMY & DRAMATIC": "/assets/backgrounds/StormyLoading.gif",
+    "CRISP & SUNNY": `${import.meta.env.BASE_URL}assets/backgrounds/SunnyLoading.gif`,
+    "RAINY & COZY": `${import.meta.env.BASE_URL}assets/backgrounds/RainyLoading.gif`,
+    "WINDY & BROODING": `${import.meta.env.BASE_URL}assets/backgrounds/WindyLoading.gif`,
+    "STORMY & DRAMATIC": `${import.meta.env.BASE_URL}assets/backgrounds/StormyLoading.gif`,
   };
 
   const bgImage =
-    backgrounds[weather] || "/assets/backgrounds/SunnyLoading.gif";
+    backgrounds[weather] ||
+    `${import.meta.env.BASE_URL}assets/backgrounds/SunnyLoading.gif`;
 
- useEffect(() => {
-  const duration = 5000; // total load time (ms)
-  const steps = 10;      // number of chunky steps
-  const interval = duration / steps;
-  let currentStep = 0;
+  useEffect(() => {
+    const duration = 5000; // total load time (ms)
+    const steps = 10;
+    const interval = duration / steps;
+    let currentStep = 0;
 
-  const timer = setInterval(() => {
-    currentStep++;
-    setProgress((currentStep / steps) * 100);
-    if (currentStep >= steps) {
-      clearInterval(timer);
-      navigate("/tree");
-    }
-  }, interval);
+    const timer = setInterval(() => {
+      currentStep++;
+      setProgress((currentStep / steps) * 100);
+      if (currentStep >= steps) {
+        clearInterval(timer);
+        navigate("/tree");
+      }
+    }, interval);
 
-  return () => clearInterval(timer);
-}, [navigate]);
-
+    return () => clearInterval(timer);
+  }, [navigate]);
 
   return (
     <div
       className="loading-container"
-      style={{ backgroundImage: `url(${bgImage})` }}
+      style={{
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
     >
       {/* Overlay tint */}
       <div className="loading-overlay"></div>
@@ -54,7 +59,7 @@ export default function LoadingScreen() {
 
       {/* Fox GIF */}
       <img
-        src="/assets/backgrounds/fox.gif"
+        src={`${import.meta.env.BASE_URL}assets/backgrounds/fox.gif`}
         alt="Fox helper"
         className="loading-fox"
       />

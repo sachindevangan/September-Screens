@@ -1,51 +1,67 @@
 /* src/screens/WatchlistScreen.css */
-/* src/screens/WatchlistScreen.css */
+
 .watchlist-container {
-  height: 100vh; /* lock it to the viewport */
+  height: 100vh;
   width: 100vw;
-  background: url("/assets/backgrounds/SunnyLoading.gif") no-repeat center center;
-  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem;
+  padding: clamp(1rem, 3vw, 2rem);
   font-family: "Karantina", cursive;
   color: #2f2e2e;
-
-  overflow-y: auto;   /* ✅ vertical scroll within container */
-  overflow-x: hidden; /* ✅ no sideways scroll */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-/* ✅ Add breathing space so last row isn’t stuck at bottom */
+/* Grid adapts to screen size */
 .watchlist-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* wider min */
+  gap: clamp(1rem, 2vw, 2rem); /* add more spacing between cards */
   width: 100%;
-  max-width: 1100px;
-  padding-bottom: 3rem; /* ⬅️ extra bottom space for Remove buttons */
+  max-width: 1200px; /* optional: stretch the grid container */
+  padding-bottom: 3rem;
 }
-
-
-
 .watchlist-title {
-  font-size: 2.5rem;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
   margin-bottom: 1.5rem;
   color: #5c1212;
+  text-align: center;
 }
 
 .empty-msg {
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
   color: #555;
+  text-align: center;
 }
 
-
+/* Cards */
 .watchlist-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
   border-radius: 14px;
-  padding: 1rem;
+  padding: clamp(0.8rem, 2vw, 1rem);
   text-align: center;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  line-height: 1.5;
+  
+  
+}
+
+/* Movie Title */
+.watchlist-card h3 {
+  font-family: "Karantina", cursive;
+  font-size: 1.8rem;      /* bigger title */
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #2f2e2e;
+}
+
+.watchlist-genres {
+  font-family: "Karantina", cursive;
+  font-size: 1.8rem;      /* bigger than before */
+  margin: 0.6rem 0;
+  color: #333;
+  line-height: 1.4;
 }
 
 .watchlist-poster {
@@ -57,45 +73,78 @@
 
 .watchlist-poster.placeholder {
   background: #eee;
-  height: 300px;
+  height: clamp(200px, 45vw, 300px);
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
 }
 
-.watchlist-genres {
-  font-size: 0.95rem;
+
+.watchlist-vibes {
   margin: 0.5rem 0;
-  color: #333;
+  font-size: 1.5rem;
+}
+
+.watchlist-vibe {
+  display: inline-block;
+  background: rgba(92, 18, 18, 0.1);
+  padding: 0.3rem 0.6rem;
+  border-radius: 8px;
+  margin: 0.2rem;
+  font-size: clamp(1.3rem, 2vw, 0.85rem);
+  color: #5c1212;
 }
 
 .remove-btn {
   background: #8b2e2e;
   color: #fff;
   border: none;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
+  padding: 0.6rem 1.2rem;              /* bigger button padding */
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 1.1rem;                   /* larger text */
+  font-weight: 600;
+  font-family: "Karantina", cursive;   /* optional: match your vibe */
+  transition: background 0.2s ease, transform 0.15s ease-in-out;
 }
-.remove-btn:hover {
-  background: #b33c3c;
+
+.remove-btn:hover { 
+  background: #b33c3c; 
+  transform: scale(1.05);              /* subtle hover pop */
 }
+
 
 .clear-btn {
   background: #6e1c1c;
   color: #fff;
   border: none;
-  padding: 0.6rem 1.2rem;
+  padding: clamp(0.5rem, 2vw, 0.6rem) clamp(1rem, 3vw, 1.2rem);
   border-radius: 8px;
   cursor: pointer;
   font-family: "Karantina", cursive;
-  font-size: 1rem;
+  font-size: clamp(1.2rem, 2.5vw, 1rem);
   margin-bottom: 1rem;
   transition: background 0.2s ease, transform 0.15s ease-in-out;
 }
-
 .clear-btn:hover {
   background: #8a2424;
   transform: scale(1.05);
 }
+
+/* 📱 Mobile tweaks */
+@media (max-width: 600px) {
+  .watchlist-grid {
+    grid-template-columns: 1fr; /* single column on phones */
+    gap: 1rem;
+  }
+
+  .watchlist-card {
+    padding: 0.8rem;
+  }
+
+  .watchlist-poster {
+    max-width: 100%; /* full width inside card */
+  }
+}
+

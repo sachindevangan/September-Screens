@@ -21,7 +21,7 @@ export default function SuggestionScreen() {
   } = useAppContext();
 
   const [showTrailer, setShowTrailer] = useState(false);
-  const [justAdded, setJustAdded] = useState(false); // ✅ new
+  const [justAdded, setJustAdded] = useState(false);
 
   // normalize and filter pool
   useEffect(() => {
@@ -45,32 +45,27 @@ export default function SuggestionScreen() {
     }
   }, [weather, withWho, suggestionPool, setSuggestionPool, setSuggestionIndex]);
 
-  // reset justAdded whenever selectedMovie changes
   useEffect(() => {
     setJustAdded(false);
   }, [selectedMovie]);
 
-  // Next suggestion
-  // Next suggestion
-const nextSuggestion = useCallback(async () => {
-  if (!suggestionPool.length) return;
+  const nextSuggestion = useCallback(async () => {
+    if (!suggestionPool.length) return;
 
-  // if at the last index, stop (or reset if you want)
-  if (suggestionIndex >= suggestionPool.length - 1) {
-    alert("No more suggestions in this category!");
-    return; // 👈 stops instead of looping
-  }
+    if (suggestionIndex >= suggestionPool.length - 1) {
+      alert("No more suggestions in this category!");
+      return;
+    }
 
-  const nextIndex = suggestionIndex + 1;
-  setSuggestionIndex(nextIndex);
+    const nextIndex = suggestionIndex + 1;
+    setSuggestionIndex(nextIndex);
 
-  const nextTitle = suggestionPool[nextIndex].title;
-  const tmdb = await fetchMovieFromTMDB(nextTitle);
-  setSelectedMovie(
-    tmdb || { title: nextTitle, poster: null, overview: "" }
-  );
-}, [suggestionPool, suggestionIndex, setSuggestionIndex, setSelectedMovie]);
-
+    const nextTitle = suggestionPool[nextIndex].title;
+    const tmdb = await fetchMovieFromTMDB(nextTitle);
+    setSelectedMovie(
+      tmdb || { title: nextTitle, poster: null, overview: "" }
+    );
+  }, [suggestionPool, suggestionIndex, setSuggestionIndex, setSelectedMovie]);
 
   if (!selectedMovie) {
     return (
@@ -83,29 +78,31 @@ const nextSuggestion = useCallback(async () => {
     );
   }
 
-  // check if already exists in watchlist
   const inWatchlist = watchlist.some((m) => m.title === selectedMovie.title);
 
-  // handle add
   const handleAddToWatchlist = () => {
     addToWatchlist(selectedMovie);
-    setJustAdded(true); // ✅ mark as just added
+    setJustAdded(true);
   };
+
+  // ✅ Fix background path
+  const bgImage = selectedMovie.backdrop
+    ? selectedMovie.backdrop
+    : `${import.meta.env.BASE_URL}assets/backgrounds/SunnyLoading.gif`;
 
   return (
     <div
       className="suggestion-container"
       style={{
-        backgroundImage: selectedMovie.backdrop
-          ? `url(${selectedMovie.backdrop})`
-          : "url('/assets/backgrounds/SunnyLoading.gif')",
+        backgroundImage: `url(${bgImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       <div className="card">
         <h1 className="headline">Your movie suggestions are:</h1>
-
         <div className="content">
-          {/* Poster */}
           <div className="poster-wrap">
             {selectedMovie.poster ? (
               <img
@@ -118,7 +115,6 @@ const nextSuggestion = useCallback(async () => {
             )}
           </div>
 
-          {/* Info */}
           <div className="info">
             <h2 className="title">
               {selectedMovie.title}{" "}
@@ -129,7 +125,9 @@ const nextSuggestion = useCallback(async () => {
               )}
             </h2>
 
-            {selectedMovie.tagline && <p className="tagline">“{selectedMovie.tagline}”</p>}
+            {selectedMovie.tagline && (
+              <p className="tagline">“{selectedMovie.tagline}”</p>
+            )}
 
             <p className="meta">
               {selectedMovie.runtime ? `${selectedMovie.runtime} min` : null}
@@ -162,7 +160,6 @@ const nextSuggestion = useCallback(async () => {
                 </button>
               )}
 
-              {/* ✅ Watchlist button logic */}
               {inWatchlist ? (
                 justAdded ? (
                   <button className="btn watchlist-btn added" disabled>
@@ -187,7 +184,6 @@ const nextSuggestion = useCallback(async () => {
         </div>
       </div>
 
-      {/* Trailer Modal */}
       {showTrailer && (
         <div className="trailer-overlay" onClick={() => setShowTrailer(false)}>
           <div className="trailer-modal" onClick={(e) => e.stopPropagation()}>

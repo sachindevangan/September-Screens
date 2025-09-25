@@ -1,23 +1,22 @@
 .tree-container {
   height: 100vh;
   width: 100vw;
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
   overflow: hidden;
   position: relative;
-  padding-bottom: 6rem; /* lifts everything from the bottom */
+  padding-bottom: clamp(3rem, 8vh, 6rem); /* responsive bottom spacing */
+  background-size: cover;
+  background-position: center;
 }
 
 /* Tree image - responsive */
 .tree {
-  width: clamp(250px, 40vw, 700px); /* min 250px, scales with screen, max 700px */
+  width: clamp(200px, 40vw, 700px); /* shrink more on small screens */
   height: auto;
-  margin-bottom: 2rem; /* spacing above button */
+  margin-bottom: 1.5rem;
 }
 
 /* Shake animation */
@@ -26,41 +25,34 @@
 }
 
 @keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  50% { transform: translateX(10px); }
-  75% { transform: translateX(-10px); }
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-10px); }
+  50%  { transform: translateX(10px); }
+  75%  { transform: translateX(-10px); }
   100% { transform: translateX(0); }
 }
 
-/* Falling leaves */
+/* Leaves */
 .leaf {
   position: absolute;
   top: 0;
-  font-size: clamp(1.5rem, 2vw, 2.5rem); /* responsive leaf size */
+    font-size: clamp(2rem, 3vw, 3rem); /* scale down on phones */
   opacity: 0;
   animation: fall 2s linear forwards;
-
-  /* remove default button look */
   background: transparent;
   border: none;
   outline: none;
-  box-shadow: none;
-  padding: 0;
-  margin: 0;
   cursor: pointer;
 }
 
-
-.leaf-1 { left: 40%; animation-delay: 0.2s; }
+.leaf-1 { left: 35%; animation-delay: 0.2s; }
 .leaf-2 { left: 50%; animation-delay: 0.5s; }
-.leaf-3 { left: 60%; animation-delay: 0.8s; }
+.leaf-3 { left: 65%; animation-delay: 0.8s; }
 
 @keyframes fall {
   0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(80vh) rotate(360deg); opacity: 1; }
+  100% { transform: translateY(75vh) rotate(360deg); opacity: 1; }
 }
-
 
 /* Shake Button */
 .shake-btn {
@@ -70,47 +62,71 @@
   color: white;
   padding: 0.6rem 1.4rem;
   font-family: "Karantina", cursive;
-  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-size: clamp(0.9rem, 1.5vw, 1.3rem);
   cursor: pointer;
   z-index: 2;
-  margin-bottom: 2rem; /* lifts button above screen edge */
+  margin-bottom: 1.5rem;
   box-shadow: 3px 3px 0 #2f2e2e;
   transition: transform 0.2s;
 }
+.shake-btn:hover { transform: scale(1.05); }
 
-.shake-btn:hover {
-  transform: scale(1.05);
-}
-
+/* Floating note */
 .tree-note {
   position: absolute;
-  bottom: 6rem; /* line up with the shake button */
-  right: 2rem;  /* bottom-right corner */
-  background: rgba(255, 240, 220, 0.85); /* warm autumn beige */
+  bottom: clamp(4rem, 10vh, 6rem);
+  right: 1rem;
+  background: rgba(255, 240, 220, 0.85);
   padding: 0.6rem 1.2rem;
   border-radius: 12px;
   font-family: "Karantina", cursive;
-  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
-  color: #5c1212; /* same deep red as shake button */
+  font-size: clamp(0.8rem, 1.5vw, 1.1rem);
+  color: #5c1212;
   text-align: center;
   box-shadow: 0 4px 10px rgba(92, 18, 18, 0.25);
   z-index: 2;
-
-  /* animation */
   animation: slideIn 0.8s ease-out forwards;
 }
 
 @keyframes slideIn {
-  0% {
-    transform: translateX(150%) scale(0.9);
-    opacity: 0;
+  0%   { transform: translateX(150%) scale(0.9); opacity: 0; }
+  70%  { transform: translateX(-5%) scale(1.02); opacity: 1; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+/* 📱 Mobile Optimizations */
+@media (max-width: 768px) {
+  .tree-container {
+    padding-bottom: 4rem;
   }
-  70% {
-    transform: translateX(-5%) scale(1.02);
-    opacity: 1;
+  .tree {
+    width: clamp(180px, 60vw, 500px);
+    margin-bottom: 1rem;
   }
-  100% {
-    transform: translateX(0) scale(1);
-    opacity: 1;
+  .tree-note {
+    bottom: 5rem;
+    right: 0.5rem;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+  }
+  .shake-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .tree {
+    width: 70vw;
+  }
+  .tree-note {
+    position: static; /* ✅ don’t float on tiny screens */
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+  .shake-btn {
+    margin-bottom: 1rem;
+    width: 80%;
+    max-width: 250px;
   }
 }
