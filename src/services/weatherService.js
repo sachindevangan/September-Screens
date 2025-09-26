@@ -2,11 +2,11 @@
 
 // Helper: Map OpenWeather conditions to app vibes + emoji
 function mapWeatherToVibe(weatherMain) {
-  if (!weatherMain) return { vibe: "CRISP & SUNNY", emoji: "☀️" };
+  if (!weatherMain) return { vibe: "CLEAR & CALM", emoji: "☀️" };
 
   const main = weatherMain.toLowerCase();
 
-  if (main.includes("clear")) return { vibe: "CRISP & SUNNY", emoji: "☀️" };
+  if (main.includes("clear")) return { vibe: "CLEAR & CALM", emoji: "☀️" };
   if (main.includes("cloud") || main.includes("mist") || main.includes("fog"))
     return { vibe: "WINDY & BROODING", emoji: "🌫️" };
   if (main.includes("rain") || main.includes("drizzle"))
@@ -16,7 +16,7 @@ function mapWeatherToVibe(weatherMain) {
   if (main.includes("snow"))
     return { vibe: "RAINY & COZY", emoji: "❄️" }; // you can create a new vibe later if you want
 
-  return { vibe: "CRISP & SUNNY", emoji: "☀️" }; // fallback
+  return { vibe: "CLEAR & CALM", emoji: "☀️" }; // fallback
 }
 
 export async function fetchWeather(lat, lon) {

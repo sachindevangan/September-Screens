@@ -7,14 +7,14 @@ export default function BackgroundSound({ weather, audioRef }) {
   const BACKGROUND_VOLUME = 0.25;
 
   const soundMap = {
-    "CRISP & SUNNY": `${import.meta.env.BASE_URL}assets/sounds/sunny-birds.mp3`,
+    "CLEAR & CALM": `${import.meta.env.BASE_URL}assets/sounds/sunny-birds.mp3`,
     "RAINY & COZY": `${import.meta.env.BASE_URL}assets/sounds/rain.mp3`,
     "WINDY & BROODING": `${import.meta.env.BASE_URL}assets/sounds/wind.mp3`,
     "STORMY & DRAMATIC": `${import.meta.env.BASE_URL}assets/sounds/thunder.mp3`,
   };
 
   const fadeDurations = {
-    "CRISP & SUNNY": { fadeOut: 800, fadeIn: 1500 },
+    "CLEAR & CALM": { fadeOut: 800, fadeIn: 1500 },
     "RAINY & COZY": { fadeOut: 1000, fadeIn: 2000 },
     "WINDY & BROODING": { fadeOut: 800, fadeIn: 1200 },
     "STORMY & DRAMATIC": { fadeOut: 400, fadeIn: 900 },

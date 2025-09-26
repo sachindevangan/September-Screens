@@ -7,20 +7,16 @@
   "type": "module",
   "main": "electron-main.js",
   "homepage": "https://sachindevangan.github.io/September-Screens",
- "scripts": {
-  "dev": "vite",
-  "build:web": "cross-env BUILD_TARGET=web vite build",
-  "build:electron": "cross-env BUILD_TARGET=electron vite build",
-  "preview": "vite preview",
-  "predeploy": "npm run build:web",
-  "deploy": "gh-pages -d dist",
-
-  "electron:dev": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
-  "electron:build": "npm run build:electron && electron-builder"
-}
-
-
-,
+  "scripts": {
+    "dev": "vite",
+    "build:web": "cross-env VITE_BUILD_TARGET=web vite build",
+    "build:electron": "cross-env BUILD_TARGET=electron vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build:web",
+    "deploy": "gh-pages -d dist",
+    "electron:dev": "concurrently -k \"vite\" \"wait-on http://localhost:5173 && cross-env VITE_DEV_SERVER_URL=http://localhost:5173 electron .\"",
+    "electron:build": "npm run build:electron && electron-builder"
+  },
   "dependencies": {
     "framer-motion": "^12.23.15",
     "gsap": "^3.13.0",
@@ -55,7 +51,7 @@
     },
     "files": [
       "dist/**/*",
-      "electron-main.js"  
+      "electron-main.js"
     ],
     "extraResources": [
       {
@@ -66,11 +62,21 @@
     "win": {
       "target": "nsis"
     },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "September Screens",
+      "license": "public/LICENSE.txt"
+    },
     "mac": {
       "target": "dmg"
     },
     "linux": {
-      "target": "AppImage"
+      "target": "AppImage",
+      "category": "Utility"
     }
   }
 }

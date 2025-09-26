@@ -5,7 +5,7 @@ import "./Loader.css";
 export default function Loader({ weather }) {
   // pick emoji based on weather
   const weatherIcons = {
-    "CRISP & SUNNY": "🌞",
+    "CLEAR & CALM": "🌞",
     "RAINY & COZY": "🌧️",
     "WINDY & BROODING": "🌬️",
     "STORMY & DRAMATIC": "⚡",

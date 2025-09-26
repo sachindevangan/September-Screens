@@ -5,7 +5,7 @@ const AppContext = createContext();
 
 export function AppProvider({ children }) {
   const [withWho, setWithWho] = useState(null);
-  const [weather, setWeather] = useState("CRISP & SUNNY"); // 🌞 default
+  const [weather, setWeather] = useState("CLEAR & CALM"); // 🌞 default
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [suggestionPool, setSuggestionPool] = useState([]);
   const [suggestionIndex, setSuggestionIndex] = useState(0);

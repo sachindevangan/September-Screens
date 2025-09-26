@@ -7,7 +7,7 @@ export default function WatchlistScreen() {
   const { watchlist, removeFromWatchlist, clearWatchlist } = useAppContext();
 
   const weatherIcons = {
-  "CRISP & SUNNY": "☀️",
+  "CLEAR & CALM": "☀️",
   "RAINY & COZY": "🌧️",
   "WINDY & BROODING": "🌪️",
   "STORMY & DRAMATIC": "⛈️",

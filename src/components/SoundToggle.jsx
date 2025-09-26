@@ -43,7 +43,7 @@ export default function SoundToggle({ audioRef, weather }) {
   };
 
   const soundLabels = {
-    "CRISP & SUNNY": "🌞 Birds",
+    "CLEAR & CALM": "🌞 Birds",
     "RAINY & COZY": "🌧️ Rain",
     "WINDY & BROODING": "🌬️ Wind",
     "STORMY & DRAMATIC": "⚡ Thunder",

@@ -8,7 +8,7 @@ import NavButtons from "../components/NavButtons";
 // Helper: Map OpenWeatherMap → vibe + icon
 function mapWeatherToChoice(weatherMain) {
   const lower = weatherMain.toLowerCase();
-  if (lower.includes("clear")) return { choice: "CRISP & SUNNY", icon: "☀️" };
+  if (lower.includes("clear")) return { choice: "CLEAR & CALM", icon: "☀️" };
   if (lower.includes("rain") || lower.includes("drizzle"))
     return { choice: "RAINY & COZY", icon: "🌧️" };
   if (
@@ -22,7 +22,7 @@ function mapWeatherToChoice(weatherMain) {
   if (lower.includes("thunderstorm"))
     return { choice: "STORMY & DRAMATIC", icon: "⚡" };
 
-  return { choice: "CRISP & SUNNY", icon: "☀️" }; // fallback
+  return { choice: "CLEAR & CALM", icon: "☀️" }; // fallback
 }
 
 export default function WeatherScreen() {
@@ -154,9 +154,9 @@ const fallbackToIP = async () => {
       <div className="button-grid">
         <button
           className="choice-btn"
-          onClick={() => handleChoice("CRISP & SUNNY")}
+          onClick={() => handleChoice("CLEAR & CALM")}
         >
-           CRISP & SUNNY
+           CLEAR & CALM
         </button>
         <button
           className="choice-btn"

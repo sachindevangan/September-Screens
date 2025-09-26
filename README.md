@@ -10,7 +10,7 @@ The app also includes immersive ambient sounds, a personalized watchlist, and a 
 
 - 🍂 **Vibe-based Movie Suggestions**  
   Choose your current mood:  
-  - Weather → ☀️ Crisp & Sunny, 🌧️ Rainy & Cozy, 🌬️ Windy & Brooding, ⚡ Stormy & Dramatic  
+  - Weather → ☀️ CLEAR & CALM, 🌧️ Rainy & Cozy, 🌬️ Windy & Brooding, ⚡ Stormy & Dramatic  
   - Company → 👤 Alone, 👥 Friends, 👨‍👩‍👧 Family, ❤️ Special Someone  
   The app recommends movies that match these exact vibes.  
 

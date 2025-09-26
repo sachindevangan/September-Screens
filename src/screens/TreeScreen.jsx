@@ -21,7 +21,7 @@ export default function TreeScreen() {
 
   // ✅ Backgrounds per weather
   const backgrounds = {
-    "CRISP & SUNNY": `${import.meta.env.BASE_URL}assets/backgrounds/SunnyLoading.gif`,
+    "CLEAR & CALM": `${import.meta.env.BASE_URL}assets/backgrounds/SunnyLoading.gif`,
     "RAINY & COZY": `${import.meta.env.BASE_URL}assets/backgrounds/RainyLoading.gif`,
     "WINDY & BROODING": `${import.meta.env.BASE_URL}assets/backgrounds/WindyLoading.gif`,
     "STORMY & DRAMATIC": `${import.meta.env.BASE_URL}assets/backgrounds/StormyLoading.gif`,

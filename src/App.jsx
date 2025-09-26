@@ -21,7 +21,7 @@ function GlobalSound() {
 
   // Force birds (icon + sound) on home and with-who
   if (location.pathname === "/" || location.pathname === "/with-who") {
-    soundKey = "CRISP & SUNNY";
+    soundKey = "CLEAR & CALM";
   }
 
   // Disable completely on watchlist
