@@ -84,19 +84,25 @@ npm run build
 
 ## 💻 Run Locally (Linux / macOS)
 ## 1. Clone the repo
+```bash
 git clone https://github.com/sachindevangan/September-Screens.git
 cd September-Screens
-
+```
 ## 2. Install dependencies
+```bash
 npm install
-
+```
 ## 3. Build the React app
+```bash
 npm run build:electron
-
+```
 ## 4. Package Electron app
-##   On macOS → creates a .dmg in /release
-##   On Linux → creates an .AppImage in /release
-npm run electron:build
-
+```bash
+  On macOS → creates a .dmg in /release
+  On Linux → creates an .AppImage in /release
+  npm run electron:build
+```
 ## 5. Run the app (development mode with live reload)
+```bash
 npm run electron:dev
+```
